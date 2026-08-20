@@ -596,6 +596,27 @@
   width: 100%;
 }
 
+.pricing-note {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  background: rgba(0, 229, 255, 0.06);
+  border: 1px solid rgba(0, 229, 255, 0.2);
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-bottom: 22px;
+}
+
+.pricing-disclaimer {
+  font-size: 0.74rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-top: 18px;
+}
+
 /* ---------- Team ---------- */
 .team-card {
   padding: 2.6rem;

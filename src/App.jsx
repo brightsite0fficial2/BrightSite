@@ -152,21 +152,27 @@ function Pricing() {
       <div className="grid grid-3 pricing-grid">
         {PRICING.plans.map((plan) => (
           <div className={`card pricing-card ${plan.highlight ? "pricing-highlight" : ""}`} key={plan.name}>
-            {plan.highlight && <span className="pricing-badge">Most popular</span>}
+            {plan.badge ? (
+              <span className="pricing-badge">{plan.badge}</span>
+            ) : (
+              plan.highlight && <span className="pricing-badge">Most popular</span>
+            )}
             <h3>{plan.name}</h3>
             <p className="pricing-tagline">{plan.tagline}</p>
             <div className="pricing-price">
               <span className="pricing-amount">{plan.price}</span>
               <span className="pricing-unit">{plan.unit}</span>
             </div>
+            {plan.note && <p className="pricing-note">{plan.note}</p>}
             <ul className="pricing-features">
               {plan.features.map((f) => (
                 <li key={f}>{f}</li>
               ))}
             </ul>
             <a className={`btn ${plan.highlight ? "btn-primary" : "btn-ghost"} pricing-cta`} href="#connect">
-              Ask about this plan
+              {plan.ctaLabel || "Ask about this plan"}
             </a>
+            {plan.disclaimer && <p className="pricing-disclaimer">{plan.disclaimer}</p>}
           </div>
         ))}
       </div>
