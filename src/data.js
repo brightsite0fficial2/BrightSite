@@ -222,6 +222,22 @@ export const PRICING = {
       highlight: false,
     },
     {
+      name: "Final Year Project",
+      price: "₹6,999",
+      unit: "one-time",
+      tagline: "A complete final-year project build for students — code, documentation, and presentation support.",
+      features: [
+        "Full working project (frontend, backend, database)",
+        "Documentation assistance (report formatting & structure)",
+        "Content assistance for PPT (presentation/viva)",
+        "Deployment assistance (working live demo)",
+        "Source code handover",
+        "Guidance for viva/demo questions",
+        "Additional features: ₹499 each",
+      ],
+      highlight: false,
+    },
+    {
       name: "Content & Photoshoot",
       price: "₹5,999",
       unit: "per package",
