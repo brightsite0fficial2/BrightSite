@@ -227,6 +227,7 @@ export const PRICING = {
       unit: "one-time",
       tagline: "A complete final-year project build for students — code, documentation, and presentation support.",
       features: [
+        "Student brings their own project idea — we build on that idea only",
         "Full working project (frontend, backend, database)",
         "Documentation assistance (report formatting & structure)",
         "Content assistance for PPT (presentation/viva)",
