@@ -962,6 +962,93 @@
   box-shadow: none;
 }
 
+/* ---------- Feedback ---------- */
+.feedback-grid {
+  margin-bottom: 48px;
+}
+
+.feedback-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.feedback-stars {
+  color: var(--accent);
+  font-size: 1.1rem;
+  letter-spacing: 3px;
+}
+
+.feedback-message {
+  color: var(--text-secondary);
+  font-style: italic;
+  flex: 1;
+}
+
+.feedback-author {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: auto;
+}
+
+.feedback-name {
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.feedback-role {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.feedback-empty {
+  text-align: center;
+  color: var(--text-muted);
+  margin-bottom: 48px;
+}
+
+.feedback-form {
+  margin: 0 auto;
+}
+
+.feedback-form h3 {
+  margin: 0;
+}
+
+.feedback-thanks {
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.star-rating {
+  display: flex;
+  gap: 6px;
+}
+
+.star {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 1.7rem;
+  line-height: 1;
+  color: var(--border);
+  cursor: pointer;
+  transition: color 0.2s var(--ease-premium), transform 0.2s var(--ease-premium);
+}
+
+.star:hover,
+.star:focus-visible {
+  transform: scale(1.15);
+}
+
+.star-filled {
+  color: var(--accent);
+}
+
 /* ---------- Footer ---------- */
 .footer {
   margin-top: auto;

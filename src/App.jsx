@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { collection, addDoc, serverTimestamp, onSnapshot, query, orderBy, limit } from "firebase/firestore";
 import { motion } from "framer-motion";
 import Lenis from "lenis";
 import { db } from "./firebase";
@@ -29,6 +29,7 @@ function Nav() {
     ["#pricing", "Pricing"],
     ["#team", "Team"],
     ["#contact", "Contact"],
+    ["#feedback", "Feedback"],
     ["#connect", "Connect"],
   ];
   return (
@@ -321,6 +322,155 @@ function Contact() {
   );
 }
 
+function StarRating({ value, onChange }) {
+  return (
+    <div className="star-rating" role="radiogroup" aria-label="Rating out of 5">
+      {[1, 2, 3, 4, 5].map((n) => (
+        <button
+          key={n}
+          type="button"
+          className={`star ${n <= value ? "star-filled" : ""}`}
+          role="radio"
+          aria-checked={n === value}
+          aria-label={`${n} star${n > 1 ? "s" : ""}`}
+          onClick={() => onChange(n)}
+        >
+          ★
+        </button>
+      ))}
+    </div>
+  );
+}
+
+function FeedbackCard({ item }) {
+  return (
+    <div className="card feedback-card">
+      <div className="feedback-stars" aria-label={`Rated ${item.rating} out of 5`}>
+        {"★".repeat(item.rating)}
+        {"☆".repeat(5 - item.rating)}
+      </div>
+      <p className="feedback-message">"{item.message}"</p>
+      <div className="feedback-author">
+        <span className="feedback-name">{item.name}</span>
+        {item.role && <span className="feedback-role">{item.role}</span>}
+      </div>
+    </div>
+  );
+}
+
+function Feedback() {
+  const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [form, setForm] = useState({ name: "", role: "", rating: 0, message: "" });
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const q = query(collection(db, "feedback"), orderBy("createdAt", "desc"), limit(24));
+    const unsubscribe = onSnapshot(
+      q,
+      (snap) => {
+        setItems(snap.docs.map((d) => ({ id: d.id, ...d.data() })));
+        setLoading(false);
+      },
+      (err) => {
+        console.error("Feedback fetch failed:", err);
+        setLoading(false);
+      }
+    );
+    return unsubscribe;
+  }, []);
+
+  function update(field, value) {
+    setForm((f) => ({ ...f, [field]: value }));
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    if (!form.rating || !form.name.trim() || !form.message.trim()) return;
+    setSubmitting(true);
+    setError("");
+    try {
+      await addDoc(collection(db, "feedback"), {
+        name: form.name.trim(),
+        role: form.role.trim(),
+        rating: form.rating,
+        message: form.message.trim(),
+        createdAt: serverTimestamp(),
+      });
+      setSubmitted(true);
+    } catch (err) {
+      console.error("Feedback submission failed:", err);
+      setError("Something went wrong submitting your feedback. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
+  return (
+    <section id="feedback" className="section feedback-section">
+      <div className="section-head">
+        <p className="eyebrow">Client feedback</p>
+        <h2>What it's like working with us</h2>
+        <p className="section-sub">
+          Worked with us on a project? We'd love to hear how it went — your feedback shows up here for everyone to see.
+        </p>
+      </div>
+
+      {!loading && items.length > 0 && (
+        <div className="grid grid-3 feedback-grid">
+          {items.map((item) => (
+            <FeedbackCard item={item} key={item.id} />
+          ))}
+        </div>
+      )}
+      {!loading && items.length === 0 && (
+        <p className="feedback-empty">No feedback yet — be the first to share your experience.</p>
+      )}
+
+      {submitted ? (
+        <div className="card feedback-thanks">
+          <h3>Thanks for sharing, {form.name.split(" ")[0]}!</h3>
+          <p>Your feedback is now posted above for everyone to see.</p>
+        </div>
+      ) : (
+        <form className="card project-form feedback-form" onSubmit={handleSubmit}>
+          <h3>Leave your feedback</h3>
+          <div className="form-row">
+            <label>
+              Name
+              <input type="text" required value={form.name} onChange={(e) => update("name", e.target.value)} />
+            </label>
+            <label>
+              Role / Company (optional)
+              <input type="text" value={form.role} onChange={(e) => update("role", e.target.value)} />
+            </label>
+          </div>
+          <label className="form-full">
+            Rating
+            <StarRating value={form.rating} onChange={(n) => update("rating", n)} />
+          </label>
+          <label className="form-full">
+            Your experience
+            <textarea
+              rows={4}
+              required
+              placeholder="Tell us how the project went — communication, speed, quality, anything else..."
+              value={form.message}
+              onChange={(e) => update("message", e.target.value)}
+            />
+          </label>
+          {error && <p className="form-error">{error}</p>}
+          <button className="btn btn-primary" type="submit" disabled={!form.rating || submitting}>
+            {submitting ? "Submitting..." : "Submit feedback"}
+          </button>
+        </form>
+      )}
+    </section>
+  );
+}
+
 function ProjectForm() {
   const [form, setForm] = useState({
     name: "",
@@ -579,6 +729,7 @@ export default function App() {
         <Reveal><Pricing /></Reveal>
         <Reveal><Team /></Reveal>
         <Reveal><Contact /></Reveal>
+        <Reveal><Feedback /></Reveal>
         <Reveal><ProjectForm /></Reveal>
       </main>
       <Footer />
