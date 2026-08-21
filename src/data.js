@@ -1,3 +1,15 @@
+import {
+  Gauge,
+  Zap,
+  ShieldCheck,
+  RefreshCw,
+  Utensils,
+  Scissors,
+  HeartPulse,
+  ShoppingBag,
+  GraduationCap,
+  Dumbbell,
+} from "lucide-react";
 import manojPhoto from "./assets/1776158946160.jpg";
 import salvinPhoto from "./assets/file_0000000097c071f8b58e0a75d26be8e1.png";
 
@@ -95,22 +107,43 @@ export const SERVICES = [
     title: "Speed & Security Audit",
     detail:
       "A free first look at any existing site — load-time breakdown, mobile performance, HTTPS/SSL status, and the security gaps most attackers look for first.",
+    icon: Gauge,
+    color: "#22d3ee",
   },
   {
     title: "Fast Website Builds",
     detail:
       "New sites built on a modern stack (React, optimized assets, clean database queries) so pages load quickly and rank better instead of losing visitors before they arrive.",
+    icon: Zap,
+    color: "#f97316",
   },
   {
     title: "Security Hardening",
     detail:
       "HTTPS enforcement, role-based authentication, session management, input validation, and dependency updates — the fundamentals that keep a site from becoming the next headline.",
+    icon: ShieldCheck,
+    color: "#f43f5e",
   },
   {
     title: "Ongoing Care",
     detail:
       "Monitoring, backups, and updates after launch, so performance and security don't quietly decay once the site goes live.",
+    icon: RefreshCw,
+    color: "#a855f7",
   },
+];
+
+// ---------------------------------------------------------------------------
+// EDIT ME: adjust the industry list to match the client types you actually
+// want to attract.
+// ---------------------------------------------------------------------------
+export const INDUSTRIES = [
+  { label: "Restaurants & Cafes", icon: Utensils, color: "#f97316" },
+  { label: "Salons & Spas", icon: Scissors, color: "#ec4899" },
+  { label: "Healthcare Clinics", icon: HeartPulse, color: "#ef4444" },
+  { label: "Retail & E-commerce", icon: ShoppingBag, color: "#22c55e" },
+  { label: "Education & Coaching", icon: GraduationCap, color: "#3b82f6" },
+  { label: "Gyms & Fitness", icon: Dumbbell, color: "#a855f7" },
 ];
 
 export const PROJECTS = [

@@ -183,10 +183,15 @@
   grid-template-columns: repeat(5, 1fr);
 }
 
+.grid-6 {
+  grid-template-columns: repeat(6, 1fr);
+}
+
 @media (max-width: 900px) {
   .grid-4,
-  .grid-5 {
-    grid-template-columns: repeat(2, 1fr);
+  .grid-5,
+  .grid-6 {
+    grid-template-columns: repeat(3, 1fr);
   }
   .grid-3 {
     grid-template-columns: repeat(2, 1fr);
@@ -199,6 +204,9 @@
   .grid-4,
   .grid-5 {
     grid-template-columns: 1fr;
+  }
+  .grid-6 {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -245,6 +253,52 @@
 
 .card p {
   font-size: 0.92rem;
+}
+
+/* ---------- Services ---------- */
+.service-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  color: #05070d;
+  margin-bottom: 1.1rem;
+}
+
+/* ---------- Industries ---------- */
+.industries-grid {
+  gap: 20px;
+}
+
+.industry-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  text-align: center;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.8rem 1rem;
+  transition:
+    transform 0.4s var(--ease-premium),
+    border-color 0.4s var(--ease-premium),
+    box-shadow 0.4s var(--ease-premium);
+}
+
+.industry-card span {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.industry-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(0, 229, 255, 0.4);
+  box-shadow: var(--shadow), 0 0 24px var(--accent-glow);
 }
 
 /* ---------- Hero ---------- */

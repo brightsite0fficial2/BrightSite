@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import Lenis from "lenis";
 import { db } from "./firebase";
 import { sendSubmissionEmails } from "./emailjs";
-import { BRAND, TEAM, SERVICES, PROJECTS, PRICING, CONTACT, TERMS } from "./data";
+import { BRAND, TEAM, SERVICES, INDUSTRIES, PROJECTS, PRICING, CONTACT, TERMS } from "./data";
 import logo from "./assets/logo.png";
 import "./App.css";
 
@@ -101,9 +101,35 @@ function Services() {
       </div>
       <div className="grid grid-4">
         {SERVICES.map((s) => (
-          <div className="card" key={s.title}>
+          <div className="card service-card" key={s.title}>
+            <span className="service-icon" style={{ background: s.color }}>
+              <s.icon size={22} strokeWidth={2} />
+            </span>
             <h3>{s.title}</h3>
             <p>{s.detail}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function Industries() {
+  return (
+    <section id="industries" className="section section-alt industries-section">
+      <div className="section-head">
+        <p className="eyebrow">Who we build for</p>
+        <h2>Industries we power</h2>
+        <p className="section-sub">
+          Every business is different, but the fundamentals — speed, security, and a site that
+          actually converts — stay the same.
+        </p>
+      </div>
+      <div className="grid grid-6 industries-grid">
+        {INDUSTRIES.map((ind) => (
+          <div className="industry-card" key={ind.label}>
+            <ind.icon size={26} strokeWidth={1.75} color={ind.color} />
+            <span>{ind.label}</span>
           </div>
         ))}
       </div>
@@ -731,6 +757,7 @@ export default function App() {
       <main>
         <Hero />
         <Reveal><Services /></Reveal>
+        <Reveal><Industries /></Reveal>
         <Reveal><Projects /></Reveal>
         <Reveal><Pricing /></Reveal>
         <Reveal><Team /></Reveal>
