@@ -17,8 +17,8 @@ import salvinPhoto from "./assets/file_0000000097c071f8b58e0a75d26be8e1.png";
 // EDIT ME FIRST: brand name + tagline shown across the whole site.
 // ---------------------------------------------------------------------------
 export const BRAND = {
-  name: "BrightSite",
-  short: "BS",
+  name: "BuildWell",
+  short: "BW",
   tagline: "Build Better. Grow Faster.",
 };
 
@@ -275,7 +275,7 @@ export const PRICING = {
       ],
       ctaLabel: "Discuss Your Project →",
       disclaimer:
-        "Academic Responsibility: BrightSite provides software development assistance, technical guidance, documentation support and project mentorship. Students are responsible for understanding their project and complying with their institution's academic policies and submission requirements.",
+        "Academic Responsibility: BuildWell provides software development assistance, technical guidance, documentation support and project mentorship. Students are responsible for understanding their project and complying with their institution's academic policies and submission requirements.",
       highlight: false,
     },
     {
@@ -307,7 +307,7 @@ export const CONTACT = {
 export const TERMS = {
   updated: "19 August 2026",
   intro: [
-    'Welcome to BrightSite ("we", "us", "our", or "the Developer"). We provide website design, development, deployment, maintenance, and related digital services to businesses, organizations, and individuals.',
+    'Welcome to BuildWell ("we", "us", "our", or "the Developer"). We provide website design, development, deployment, maintenance, and related digital services to businesses, organizations, and individuals.',
     "These Terms & Conditions (\"Terms\") govern your use of our website and your interaction with or purchase of services from us.",
     "By accessing our website, requesting a quotation, engaging our services, approving a proposal, making a payment, or otherwise proceeding with a project, you acknowledge that you have read and understood these Terms and agree to be bound by them.",
     "If you do not agree with these Terms, please do not use our website or engage our services.",
@@ -316,7 +316,7 @@ export const TERMS = {
     {
       heading: "1. About Us",
       blocks: [
-        { p: "BrightSite is an independent web development team operated by:" },
+        { p: "BuildWell is an independent web development team operated by:" },
         { p: "Manoj B Kunachi" },
         { p: "Salvin Dsouza" },
         { p: "Email: brightsite0fficial2@gmail.com" },
@@ -1076,7 +1076,7 @@ export const TERMS = {
       heading: "39. Contact Us",
       blocks: [
         { p: "If you have questions regarding these Terms or our services, contact us at:" },
-        { p: "BrightSite" },
+        { p: "BuildWell" },
         { p: "Email: brightsite0fficial2@gmail.com" },
         { p: "Phone/WhatsApp: +91 9972590329 (Manoj) · +91-9284812726 (Salvin)" },
       ],
