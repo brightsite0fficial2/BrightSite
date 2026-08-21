@@ -646,6 +646,25 @@
   transform: rotate(-45deg) translateY(-2px);
 }
 
+.pricing-toggle {
+  display: block;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: -10px 0 22px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--accent);
+  cursor: pointer;
+  text-align: left;
+  transition: opacity 0.2s var(--ease-premium);
+}
+
+.pricing-toggle:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
 .pricing-cta {
   width: 100%;
 }

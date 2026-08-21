@@ -167,6 +167,45 @@ function Projects() {
   );
 }
 
+const PRICING_VISIBLE_FEATURES = 4;
+
+function PricingCard({ plan }) {
+  const [expanded, setExpanded] = useState(false);
+  const hasMore = plan.features.length > PRICING_VISIBLE_FEATURES;
+  const shownFeatures = expanded ? plan.features : plan.features.slice(0, PRICING_VISIBLE_FEATURES);
+
+  return (
+    <div className={`card pricing-card ${plan.highlight ? "pricing-highlight" : ""}`}>
+      {plan.badge ? (
+        <span className="pricing-badge">{plan.badge}</span>
+      ) : (
+        plan.highlight && <span className="pricing-badge">Most popular</span>
+      )}
+      <h3>{plan.name}</h3>
+      <p className="pricing-tagline">{plan.tagline}</p>
+      <div className="pricing-price">
+        <span className="pricing-amount">{plan.price}</span>
+        <span className="pricing-unit">{plan.unit}</span>
+      </div>
+      {plan.note && <p className="pricing-note">{plan.note}</p>}
+      <ul className="pricing-features">
+        {shownFeatures.map((f) => (
+          <li key={f}>{f}</li>
+        ))}
+      </ul>
+      {hasMore && (
+        <button type="button" className="pricing-toggle" onClick={() => setExpanded((v) => !v)}>
+          {expanded ? "Show less" : `+${plan.features.length - PRICING_VISIBLE_FEATURES} more features`}
+        </button>
+      )}
+      <a className={`btn ${plan.highlight ? "btn-primary" : "btn-ghost"} pricing-cta`} href="#connect">
+        {plan.ctaLabel || "Ask about this plan"}
+      </a>
+      {plan.disclaimer && <p className="pricing-disclaimer">{plan.disclaimer}</p>}
+    </div>
+  );
+}
+
 function Pricing() {
   return (
     <section id="pricing" className="section">
@@ -177,29 +216,7 @@ function Pricing() {
       </div>
       <div className="grid grid-3 pricing-grid">
         {PRICING.plans.map((plan) => (
-          <div className={`card pricing-card ${plan.highlight ? "pricing-highlight" : ""}`} key={plan.name}>
-            {plan.badge ? (
-              <span className="pricing-badge">{plan.badge}</span>
-            ) : (
-              plan.highlight && <span className="pricing-badge">Most popular</span>
-            )}
-            <h3>{plan.name}</h3>
-            <p className="pricing-tagline">{plan.tagline}</p>
-            <div className="pricing-price">
-              <span className="pricing-amount">{plan.price}</span>
-              <span className="pricing-unit">{plan.unit}</span>
-            </div>
-            {plan.note && <p className="pricing-note">{plan.note}</p>}
-            <ul className="pricing-features">
-              {plan.features.map((f) => (
-                <li key={f}>{f}</li>
-              ))}
-            </ul>
-            <a className={`btn ${plan.highlight ? "btn-primary" : "btn-ghost"} pricing-cta`} href="#connect">
-              {plan.ctaLabel || "Ask about this plan"}
-            </a>
-            {plan.disclaimer && <p className="pricing-disclaimer">{plan.disclaimer}</p>}
-          </div>
+          <PricingCard plan={plan} key={plan.name} />
         ))}
       </div>
     </section>
