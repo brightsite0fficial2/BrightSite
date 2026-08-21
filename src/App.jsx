@@ -224,6 +224,8 @@ function Pricing() {
 }
 
 function TeamMember({ member }) {
+  const [expanded, setExpanded] = useState(false);
+
   return (
     <div className="card team-card">
       <div className="team-head">
@@ -247,52 +249,60 @@ function TeamMember({ member }) {
         ))}
       </div>
 
-      <div className="team-block">
-        <h4>Skills</h4>
-        <div className="skills-grid">
-          {Object.entries(member.skills).map(([cat, items]) => (
-            <div key={cat}>
-              <p className="skills-cat">{cat}</p>
-              <p className="skills-items">{items.join(", ")}</p>
+      {expanded && (
+        <>
+          <div className="team-block">
+            <h4>Skills</h4>
+            <div className="skills-grid">
+              {Object.entries(member.skills).map(([cat, items]) => (
+                <div key={cat}>
+                  <p className="skills-cat">{cat}</p>
+                  <p className="skills-items">{items.join(", ")}</p>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-      </div>
+          </div>
 
-      <div className="team-block">
-        <h4>Experience</h4>
-        <ul className="timeline">
-          {member.experience.map((e) => (
-            <li key={e.role + e.org}>
-              <span className="timeline-role">{e.role}</span> — {e.org}
-              <span className="timeline-period">{e.period}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
+          <div className="team-block">
+            <h4>Experience</h4>
+            <ul className="timeline">
+              {member.experience.map((e) => (
+                <li key={e.role + e.org}>
+                  <span className="timeline-role">{e.role}</span> — {e.org}
+                  <span className="timeline-period">{e.period}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-      <div className="team-block">
-        <h4>Education</h4>
-        <ul className="timeline">
-          {member.education.map((e) => (
-            <li key={e.degree}>
-              {e.degree}
-              <span className="timeline-period">
-                {e.years} · {e.detail}
-              </span>
-            </li>
-          ))}
-        </ul>
-      </div>
+          <div className="team-block">
+            <h4>Education</h4>
+            <ul className="timeline">
+              {member.education.map((e) => (
+                <li key={e.degree}>
+                  {e.degree}
+                  <span className="timeline-period">
+                    {e.years} · {e.detail}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-      <div className="team-block">
-        <h4>Certifications</h4>
-        <ul className="cert-list">
-          {member.certifications.map((c) => (
-            <li key={c}>{c}</li>
-          ))}
-        </ul>
-      </div>
+          <div className="team-block">
+            <h4>Certifications</h4>
+            <ul className="cert-list">
+              {member.certifications.map((c) => (
+                <li key={c}>{c}</li>
+              ))}
+            </ul>
+          </div>
+        </>
+      )}
+
+      <button type="button" className="pricing-toggle team-toggle" onClick={() => setExpanded((v) => !v)}>
+        {expanded ? "Show less" : "Show skills, experience & certifications"}
+      </button>
 
       <div className="team-contact">
         <a href={`tel:${member.phone.replace(/\s+/g, "")}`}>{member.phone}</a>

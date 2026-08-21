@@ -665,6 +665,10 @@
   text-decoration: underline;
 }
 
+.team-toggle {
+  margin: 0;
+}
+
 .pricing-cta {
   width: 100%;
 }
